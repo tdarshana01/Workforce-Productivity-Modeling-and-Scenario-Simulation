@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Role Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- 🔹 NAVBAR -->
+<div class="navbar">
+    <div class="logo">Productivity Simulator</div>
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Company</a>
+        <a href="{{ url_for('department') }}">Department</a>
+        <a class="active" href="{{ url_for('job_role') }}">Job Role</a>
+        <a href="{{ url_for('individual') }}">Individual</a>
+        <a href="{{ url_for('get_prediction') }}">Get Prediction</a>
+    </div>
+</div>
+
+<!-- 🔹 STEP 1: Dropdown -->
+<div id="deptSelectorContainer">
+    <label>Select Job Role:</label>
+    <select id="jobRoleSelect" onchange="loadJobRolePage()">
+        <option value="">-- Select Job Role --</option>
+    </select>
+</div>
+
+<!-- 🔹 STEP 2: Dashboard -->
+<div id="dashboardContent" style="display:none;">
+
+    <!-- 🔹 KPI CARDS -->
+    <div class="kpi-section">
+
+        <div class="kpi-card">
+            <p>Total Employees</p>
+            <h2 id="empCount">-</h2>
+        </div>
+        <div class="kpi-card">
+            <p>Average Score</p>
+            <h2 id="avgScore">-</h2>
+        </div>
+        <div class="kpi-card">
+            <p>Minimum Score</p>
+            <h2 id="minScore">-</h2>
+        </div>
+        <div class="kpi-card">
+            <p>Maximum Score</p>
+            <h2 id="maxScore">-</h2>
+        </div>
+    </div>
+
+    <!-- 🔹 CHART + INFLUENCERS -->
+    <div class="middle-section">
+
+        <!-- Histogram -->
+        <div class="card">
+            <h3>Performance Distribution</h3>
+            <canvas id="histogram"></canvas>
+        </div>
+
+        <!-- Influencers -->
+        <div class="card">
+            <h3>Key Influencers</h3>
+            <div id="influencers"></div>
+        </div>
+
+    </div>
+
+    <!-- 🔹 SIMULATION BUILDER -->
+    <div class="card simulation-section">
+
+        <h2>Scenario Simulation</h2>
+
+        <div class="nlp-container">
+
+            <h3>AI Assistant (Natural Language Simulation)</h3>
+
+            <textarea id="nlpInput" placeholder="e.g. Increase training by 5 for employees less than 5 years experience"></textarea>
+
+            <button class="ai-btn" onclick="processNLP()">
+                Apply
+            </button>
+
+        </div>
+
+        <div id="nlpSummary"></div>
+
+        <div id="rules-container"></div>
+
+        <button class="add-btn" onclick="addRule()">+ Add Rule</button>
+        <button class="run-btn" onclick="runSimulation()">Run Simulation</button>
+
+        <h2>Simulation Results</h2>
+
+        <div class="simulation-container">
+
+            <!-- LEFT: KPI COLUMN -->
+            <div class="simulation-kpis">
+
+                <div class="kpi-card">
+                    <h4>Baseline Avg</h4>
+                    <h2 id="baselineAvg">-</h2>
+                </div>
+
+                <div class="kpi-card">
+                    <h4>Scenario Avg</h4>
+                    <h2 id="scenarioAvg">-</h2>
+                </div>
+
+                <div class="kpi-card">
+                    <h4>Impact</h4>
+                    <h2 id="impact">-</h2>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: CHART -->
+            <div class="simulation-chart">
+                <canvas id="comparisonChart"></canvas>
+            </div>
+
+        </div>
+
+        <button onclick="resetSimulation()" class="reset-btn">Reset Simulation</button>
+    </div>
+
+</div>
+
+<!-- ✅ FIX: Add Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Your main script -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

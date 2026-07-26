@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- 🔹 NAVBAR -->
+<div class="navbar">
+    <div class="logo">Productivity Simulator</div>
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Company</a>
+        <a href="{{ url_for('department') }}">Department</a>
+        <a href="{{ url_for('job_role') }}">JobRole</a>
+        <a href="{{ url_for('individual') }}">Individual</a>
+        <a class="active" href="{{ url_for('get_prediction') }}">Get Prediction</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Employee Performance Prediction</h2>
+
+        <div class="form-grid">
+
+            <!-- 🔹 DEMOGRAPHICS -->
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" id="Age" placeholder="Enter age">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="Gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Marital Status</label>
+                <select id="MaritalStatus">
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Education Background</label>
+                <select id="EducationBackground">
+                    <option value="Life Sciences">Life Sciences</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Technical Degree">Technical Degree</option>
+                    <option value="Human Resources">Human Resources</option>
+                </select>
+            </div>
+
+            <!-- 🔹 JOB -->
+            <div class="form-group">
+                <label>Department</label>
+                <select id="EmpDepartment"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Job Role</label>
+                <select id="EmpJobRole"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Business Travel Frequency</label>
+                <select id="BusinessTravelFrequency">
+                    <option value="Travel_Rarely">Travel Rarely</option>
+                    <option value="Travel_Frequently">Travel Frequently</option>
+                    <option value="Non-Travel">Non Travel</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Over Time</label>
+                <select id="OverTime">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <!-- 🔹 NUMERIC -->
+            <div class="form-group">
+                <label>Distance From Home</label>
+                <input type="number" id="DistanceFromHome" placeholder="Enter distance">
+            </div>
+
+            <div class="form-group">
+                <label>Education Level</label>
+                <input type="number" id="EmpEducationLevel" placeholder="1 - 5">
+            </div>
+
+            <div class="form-group">
+                <label>Environment Satisfaction</label>
+                <input type="number" id="EmpEnvironmentSatisfaction" placeholder="1 - 5">
+            </div>
+
+            <div class="form-group">
+                <label>Hourly Rate</label>
+                <input type="number" id="EmpHourlyRate" placeholder="Enter hourly rate">
+            </div>
+
+            <div class="form-group">
+                <label>Job Involvement</label>
+                <input type="number" id="EmpJobInvolvement" placeholder="1 - 4">
+            </div>
+
+            <div class="form-group">
+                <label>Job Level</label>
+                <input type="number" id="EmpJobLevel" placeholder="1 - 5">
+            </div>
+
+            <div class="form-group">
+                <label>Job Satisfaction</label>
+                <input type="number" id="EmpJobSatisfaction" placeholder="1 - 4">
+            </div>
+
+            <div class="form-group">
+                <label>Companies Worked</label>
+                <input type="number" id="NumCompaniesWorked" placeholder="Enter number">
+            </div>
+
+            <div class="form-group">
+                <label>Salary Hike (%)</label>
+                <input type="number" id="EmpLastSalaryHikePercent" placeholder="Enter %">
+            </div>
+
+            <div class="form-group">
+                <label>Relationship Satisfaction</label>
+                <input type="number" id="EmpRelationshipSatisfaction" placeholder="1 - 4">
+            </div>
+
+            <div class="form-group">
+                <label>Total Experience (Years)</label>
+                <input type="number" id="TotalWorkExperienceInYears" placeholder="Enter years">
+            </div>
+
+            <div class="form-group">
+                <label>Training Times Last Year</label>
+                <input type="number" id="TrainingTimesLastYear" placeholder="Enter number">
+            </div>
+
+            <div class="form-group">
+                <label>Work Life Balance</label>
+                <input type="number" id="EmpWorkLifeBalance" placeholder="1 - 4">
+            </div>
+
+            <div class="form-group">
+                <label>Years At Company</label>
+                <input type="number" id="ExperienceYearsAtThisCompany" placeholder="Enter years">
+            </div>
+
+            <div class="form-group">
+                <label>Years In Current Role</label>
+                <input type="number" id="ExperienceYearsInCurrentRole" placeholder="Enter years">
+            </div>
+
+            <div class="form-group">
+                <label>Years Since Last Promotion</label>
+                <input type="number" id="YearsSinceLastPromotion" placeholder="Enter years">
+            </div>
+
+            <div class="form-group">
+                <label>Years With Current Manager</label>
+                <input type="number" id="YearsWithCurrManager" placeholder="Enter years">
+            </div>
+
+        </div>
+
+        <div style="margin-top:20px; display:flex; gap:10px;">
+            <button class="run-btn" onclick="getPrediction()">Predict</button>
+            <button class="reset-btn" onclick="resetPrediction()">Reset</button>
+        </div>
+
+        <h2 id="predictionResult">-</h2>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Individual Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- 🔹 NAVBAR -->
+<div class="navbar">
+    <div class="logo">Productivity Simulator</div>
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Company</a>
+        <a href="{{ url_for('department') }}">Department</a>
+        <a href="{{ url_for('job_role') }}">JobRole</a>
+        <a class="active" href="{{ url_for('individual') }}">Individual</a>
+        <a href="{{ url_for('get_prediction') }}">Get Prediction</a>
+    </div>
+</div>
+
+<!-- 🔍 SEARCH SECTION -->
+<div id="searchContainer">
+    <input type="text" id="empSearch" placeholder="Enter Employee ID" />
+    <button id="searchBtn" onclick="searchEmployee()">Search</button>
+</div>
+
+<!-- 🔹 DASHBOARD (HIDDEN INITIALLY) -->
+<div id="individualContent" class="container individual-page" style="display:none;">
+
+    <!-- 🔹 EMPLOYEE PROFILE -->
+    <div class="card employee-profile" style="display:flex; gap:20px; align-items:center;">
+
+        <!-- IMAGE -->
+        <img id="empImage" src="" alt="Employee Image" style="width:120px; height:120px; border-radius:50%; object-fit:cover;" />
+
+        <!-- DETAILS -->
+        <div class="emp-details">
+
+            <p><strong>ID:</strong> <span id="empId"></span></p>
+            <p><strong>Name:</strong> <span id="empName">XXXX XXXXX</span></p>
+            <p><strong>Age:</strong> <span id="empAge"></span></p>
+            <p><strong>Department:</strong> <span id="empDept"></span></p>
+            <p><strong>Job Role:</strong> <span id="empRole"></span></p>
+            <p><strong>Performance Score:</strong> <span id="empScore"></span></p>
+
+        </div>
+
+    </div>
+
+    <!-- 🔹 ADDITIONAL DETAILS -->
+    <div class="card extra-details">
+
+        <h3>Additional Employee Details</h3>
+
+        <div id="extraDetails" class="details-grid"></div>
+
+    </div>
+
+    <!-- 🔹 SIMULATION BUILDER -->
+    <div class="card simulation-section">
+
+        <h2>Scenario Simulation</h2>
+
+        <div id="rules-container"></div>
+
+        <button class="add-btn" onclick="addIndividualRule()">+ Add Rule</button>
+        <button class="run-btn" onclick="runIndividualSimulation()">Run Simulation</button>
+
+        <h2>Simulation Results</h2>
+
+        <div class="simulation-container">
+
+            <!-- KPI COLUMN -->
+            <div class="simulation-kpis">
+
+                <div class="kpi-card">
+                    <h4>Baseline</h4>
+                    <h2 id="baseline">-</h2>
+                </div>
+
+                <div class="kpi-card">
+                    <h4>Scenario</h4>
+                    <h2 id="scenario">-</h2>
+                </div>
+
+                <div class="kpi-card">
+                    <h4>Impact</h4>
+                    <h2 id="impact">-</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+        <button onclick="resetSimulation()" class="reset-btn">Reset Simulation</button>
+
+    </div>
+
+</div>
+
+<!-- 🔹 SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
